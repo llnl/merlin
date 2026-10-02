@@ -805,7 +805,8 @@ def needs_merlin_expansion(cmd: str, restart_cmd: str, labels: List[str], includ
     """
     sample_keywords = ["MERLIN_SAMPLE_ID", "MERLIN_SAMPLE_PATH", "merlin_sample_id", "merlin_sample_path"]
     if include_sample_keywords:
-        labels += sample_keywords
+        # Not `labels +=`, which extends the caller's list in place.
+        labels = labels + sample_keywords
 
     for label in labels:
         if f"$({label})" in cmd:
